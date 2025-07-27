@@ -78,8 +78,10 @@ function Welcome(props: {
         </div>
         <div>
           <ul style ={{lineHeight: 2.0}}>
-            <li>Click on the <strong>Star</strong> icon to mark your query as 'starred'</li>
-            <li>Click on <ShareIcon /> to <strong>share</strong> your query with all users who
+            <li>Click on the <strong>Star</strong> icon to mark your query as
+            'starred'</li>
+            <li>Click on <ShareIcon /> to <strong>share</strong> your query 
+            with all users who
             have access to the fields in it.</li>
             <li>Click on <LoadIcon /> to <strong>load</strong> your query.</li>
             <li>Click on <NameIcon /> to <strong>name</strong> (or rename) your query.</li>

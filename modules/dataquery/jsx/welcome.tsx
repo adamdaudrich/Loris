@@ -84,9 +84,9 @@ function Welcome(props: {
             with all users who
             have access to the fields in it.</li>
             <li>Click on <LoadIcon /> to <strong>load</strong> your query.</li>
-            <li>Click on <NameIcon /> to <strong>name</strong> (or rename) 
+            <li>Click on <NameIcon /> to <strong>name</strong> (or rename)
             your query.</li>
-            <li>Click on the the pin icon to <strong>display</strong> your 
+            <li>Click on the the pin icon to <strong>display</strong> your
             query on the Loris
               welcome page and in the 'Important Queries' pane.</li>
             <li>Use Filter to <strong>find</strong> your query or queries

@@ -302,6 +302,11 @@ class RedcapDictionaryRecord
     private function _optionsToLINST() : string
     {
         $dictionary = $this->select_choices;
+            if (is_null($dictionary)) {
+
+                return '';
+            }
+
         $dictionary = str_replace(' | | ', ' | ', $dictionary);
         if (str_starts_with($dictionary, '| ')) {
             $dictionary = substr($dictionary, 2);
@@ -309,20 +314,33 @@ class RedcapDictionaryRecord
 
         $choices      = explode('|', $dictionary);
         $linstChoices = [];
-        $pattern      = "/^(\s)*([[:alnum:]]+)(\s)*,(.*)$/";
-        foreach ($choices as $choice) {
-            $matches = [];
-            if (preg_match($pattern, $choice, $matches) !== 1) {
-                throw new \DomainException(
-                    "Could not parse radio option: '$choice'"
-                );
+        $pattern      = "/^(\s)*([[:alnum:]._-]+)(\s)*,(.*)$/";
 
+        $index = 1; //Auto-index counter
+        foreach ($choices as $choice) {
+            $choice = trim($choice);
+            if (empty($choice)) continue;
+
+            $matches = [];
+            
+            if (preg_match($pattern, $choice, $matches) !== 1) {
+                // auto-generate indexing
+                error_log("Warning: Auto-indexing malformed option: '$choice' 
+                as index $index");
+                $backend = $index;
+                $label = $choice;
+                $index++;
+            } else {
+                // Normal parsing
+                $backend = $matches[2];
+                $label = trim($matches[4]);
             }
-            $backend        = $matches[2];
-            $linstFormat    = "'$backend'=>'" . trim($matches[4]) . '\'';
+
+            $linstFormat = "'$backend'=>'$label'";
             $linstChoices[] = $linstFormat;
 
         }
+        
         return join('{-}', $linstChoices);
-    }
+        }
 }
